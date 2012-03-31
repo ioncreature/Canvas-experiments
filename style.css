@@ -1,3 +1,9 @@
+html, body {
+	margin: 0px;
+	padding: 0px;
+	background-color: #f2f3f4;
+}
+
 canvas.fill_screen {
 	position: absolute;
 	top: 0;

@@ -28,9 +28,9 @@ var C = Class({
 
 	/**
 	 * Constructor
-	 * @param {Element} elem - canvas node
+	 * @param {HTMLCanvasElement} elem - canvas node
 	 */
-	init: function( /*Element*/ elem ){
+	init: function( elem ){
 		this.canvas = elem;
 		this.ctx = this.canvas.getContext( '2d' );
 	},
@@ -43,11 +43,21 @@ var C = Class({
 	 * @param {int} h
 	 * @param {string} color
 	 */
-	fillRectangle: function( x, y, w, h, color ){
+	fillRect: function( x, y, w, h, color ){
 		if ( color )
 			this.ctx.fillStyle = color;
 
 		this.ctx.fillRect( x, y, w, h );
+	},
+
+
+	strokeRect: function( x, y, w, h, lineWidth, strokeColor ){
+		if ( lineWidth )
+			this.ctx.lineWidth = lineWidth;
+		if ( strokeColor )
+			this.ctx.strokeStyle = strokeColor;
+
+		this.ctx.strokeRect( x, y, w, h );
 	},
 
 
@@ -60,7 +70,7 @@ var C = Class({
 
 
 	/**
-	 * @return {Element}
+	 * @return {HTMLCanvasElement}
 	 */
 	getCanvas: function(){
 		return this.canvas;
@@ -74,9 +84,13 @@ $( function(){
 	var elem = $( 'canvas.fill_screen' )[0],
 		canvas = new C( elem );
 
-	canvas.fillRectangle( 10 , 10 , 100, 100, '#5d9' );
-	canvas.fillRectangle( 100, 100, 100, 100, '#d59' );
-	canvas.fillRectangle( 190, 190, 100, 100, '#59d' );
+	canvas.fillRect( 10 , 10 , 100, 100, '#5d9' );
+	canvas.fillRect( 100, 100, 100, 100, '#d59' );
+	canvas.fillRect( 190, 190, 100, 100, '#59d' );
+	canvas.fillRect( 190, 10 , 100, 100, 'rgba(175, 175, 70, 0.7)' );
+	canvas.strokeRect( 10, 190 , 100, 100, 5, '#aa7' );
+
+
 
 	console.log( canvas.getContext(), canvas.getCanvas() );
 });
